@@ -1,4 +1,4 @@
-package io.github.nickacpt.earstugger.exporters.ears
+package io.github.nickacpt.earstugger.utils.ears
 
 inline fun <reified I : Enum<I>, reified O : Enum<O>> I.convert(): O {
     val outConsts = O::class.java.enumConstants.map { it.name }

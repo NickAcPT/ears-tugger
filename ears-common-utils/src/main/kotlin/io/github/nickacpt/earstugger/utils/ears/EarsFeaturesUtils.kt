@@ -1,11 +1,11 @@
-package io.github.nickacpt.earstugger.exporters.ears
+package io.github.nickacpt.earstugger.utils.ears
 
 import com.playsawdust.chipper.glow.image.io.PNGImageLoader
 import com.unascribed.ears.api.features.AlfalfaData
 import com.unascribed.ears.api.features.EarsFeatures
 import io.github.nickacpt.earstugger.core.project.model.EarsTuggerProjectModel
-import io.github.nickacpt.earstugger.exporters.ears.alfalfa.AlfalfaConstants
-import io.github.nickacpt.earstugger.exporters.ears.alfalfa.ManagedAlfalfaData
+import io.github.nickacpt.earstugger.utils.ears.alfalfa.AlfalfaConstants
+import io.github.nickacpt.earstugger.utils.ears.alfalfa.ManagedAlfalfaData
 import java.lang.Enum.*
 import kotlin.io.path.readBytes
 
@@ -67,7 +67,6 @@ object EarsFeaturesUtils {
                     snoutDepth(snout.length)
                     snoutOffset(snout.offset)
                 }
-
             }.build()
         } else {
             EarsFeatures.DISABLED

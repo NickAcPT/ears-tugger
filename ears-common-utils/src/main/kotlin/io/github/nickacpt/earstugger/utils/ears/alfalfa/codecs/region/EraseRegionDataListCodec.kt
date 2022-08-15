@@ -1,9 +1,9 @@
-package io.github.nickacpt.earstugger.exporters.ears.alfalfa.codecs.region
+package io.github.nickacpt.earstugger.utils.ears.alfalfa.codecs.region
 
 import com.unascribed.ears.common.util.BitInputStream
 import com.unascribed.ears.common.util.BitOutputStream
 import io.github.nickacpt.earstugger.core.project.model.data.EraseRegionData
-import io.github.nickacpt.earstugger.exporters.ears.alfalfa.codecs.AlfalfaCodec
+import io.github.nickacpt.earstugger.utils.ears.alfalfa.codecs.AlfalfaCodec
 
 object EraseRegionDataListCodec : AlfalfaCodec<List<EraseRegionData>> {
     override fun encode(value: List<EraseRegionData>, bos: BitOutputStream) {

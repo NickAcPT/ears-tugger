@@ -1,9 +1,9 @@
-package io.github.nickacpt.earstugger.exporters.ears.alfalfa
+package io.github.nickacpt.earstugger.utils.ears.alfalfa
 
 import com.playsawdust.chipper.glow.image.ImageData
 import io.github.nickacpt.earstugger.core.project.model.data.EraseRegionData
-import io.github.nickacpt.earstugger.exporters.ears.alfalfa.codecs.image.CapeImageDataCodec
-import io.github.nickacpt.earstugger.exporters.ears.alfalfa.codecs.region.EraseRegionDataListCodec
+import io.github.nickacpt.earstugger.utils.ears.alfalfa.codecs.image.CapeImageDataCodec
+import io.github.nickacpt.earstugger.utils.ears.alfalfa.codecs.region.EraseRegionDataListCodec
 
 object AlfalfaConstants {
 

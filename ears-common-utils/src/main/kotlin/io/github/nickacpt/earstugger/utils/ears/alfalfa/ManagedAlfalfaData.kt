@@ -1,4 +1,4 @@
-package io.github.nickacpt.earstugger.exporters.ears.alfalfa
+package io.github.nickacpt.earstugger.utils.ears.alfalfa
 
 import com.unascribed.ears.api.Slice
 import com.unascribed.ears.api.features.AlfalfaData

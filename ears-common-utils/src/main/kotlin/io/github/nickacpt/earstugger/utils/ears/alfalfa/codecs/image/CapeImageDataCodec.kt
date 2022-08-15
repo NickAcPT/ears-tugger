@@ -1,4 +1,4 @@
-package io.github.nickacpt.earstugger.exporters.ears.alfalfa.codecs.image
+package io.github.nickacpt.earstugger.utils.ears.alfalfa.codecs.image
 
 import com.playsawdust.chipper.glow.image.BlendMode
 import com.playsawdust.chipper.glow.image.ImageData

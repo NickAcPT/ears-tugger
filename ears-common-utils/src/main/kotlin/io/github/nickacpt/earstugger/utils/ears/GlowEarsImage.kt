@@ -1,4 +1,4 @@
-package io.github.nickacpt.earstugger.exporters.ears.versions
+package io.github.nickacpt.earstugger.utils.ears
 
 import com.playsawdust.chipper.glow.image.ImageData
 import com.unascribed.ears.common.WritableEarsImage

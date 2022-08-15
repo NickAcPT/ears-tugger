@@ -1,4 +1,4 @@
-package io.github.nickacpt.earstugger.exporters.ears.versions
+package io.github.nickacpt.earstugger.exporters.ears
 
 import com.playsawdust.chipper.glow.image.ImageData
 import com.playsawdust.chipper.glow.image.ImageEditor
@@ -9,7 +9,8 @@ import com.unascribed.ears.common.EarsCommon
 import com.unascribed.ears.common.EarsFeaturesWriterV1
 import io.github.nickacpt.earstugger.core.project.io.EarsTuggerProjectExporter
 import io.github.nickacpt.earstugger.core.project.model.EarsTuggerProjectModel
-import io.github.nickacpt.earstugger.exporters.ears.EarsFeaturesUtils
+import io.github.nickacpt.earstugger.utils.ears.EarsFeaturesUtils
+import io.github.nickacpt.earstugger.utils.ears.GlowEarsImage
 import java.io.ByteArrayInputStream
 import java.nio.file.Files
 
