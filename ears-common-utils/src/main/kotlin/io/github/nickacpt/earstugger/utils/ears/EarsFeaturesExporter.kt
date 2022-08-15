@@ -4,12 +4,19 @@ import com.playsawdust.chipper.glow.image.io.PNGImageLoader
 import com.unascribed.ears.api.features.AlfalfaData
 import com.unascribed.ears.api.features.EarsFeatures
 import io.github.nickacpt.earstugger.core.project.model.EarsTuggerProjectModel
+import io.github.nickacpt.earstugger.core.project.model.customization.EarsCustomizationModel
+import io.github.nickacpt.earstugger.core.project.model.customization.ProtrusionsCustomizationModel
+import io.github.nickacpt.earstugger.core.project.model.customization.TailCustomizationModel
+import io.github.nickacpt.earstugger.core.project.model.customization.WingsCustomizationModel
+import io.github.nickacpt.earstugger.core.project.model.data.EarsCustomizationTailBendsData
 import io.github.nickacpt.earstugger.utils.ears.alfalfa.AlfalfaConstants
+import io.github.nickacpt.earstugger.utils.ears.alfalfa.AlfalfaTypedKey
 import io.github.nickacpt.earstugger.utils.ears.alfalfa.ManagedAlfalfaData
 import java.lang.Enum.*
+import java.nio.file.Path
 import kotlin.io.path.readBytes
 
-object EarsFeaturesUtils {
+object EarsFeaturesExporter {
 
     private fun createAlfalfaFromProjectModel(model: EarsTuggerProjectModel): AlfalfaData {
         val data = ManagedAlfalfaData()
@@ -52,13 +59,11 @@ object EarsFeaturesUtils {
                 // Finally, the alfalfa
                 alfalfa(createAlfalfaFromProjectModel(model))
 
-
                 val tailBends = model.tail.tailBends
                 if (tailBends != null) {
                     val (firstBend, secondBend, thirdBend, fourthBend) = tailBends
                     tailBends(firstBend, secondBend, thirdBend, fourthBend)
                 }
-
 
                 val snout = model.snout
                 if (snout != null) {

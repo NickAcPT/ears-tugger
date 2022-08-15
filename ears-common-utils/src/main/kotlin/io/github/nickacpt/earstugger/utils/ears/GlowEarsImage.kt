@@ -3,7 +3,7 @@ package io.github.nickacpt.earstugger.utils.ears
 import com.playsawdust.chipper.glow.image.ImageData
 import com.unascribed.ears.common.WritableEarsImage
 
-class GlowEarsImage(private val imageData: ImageData) : WritableEarsImage {
+class GlowEarsImage(val imageData: ImageData) : WritableEarsImage {
     override fun getWidth(): Int = imageData.width
 
     override fun getHeight(): Int  = imageData.height

@@ -2,6 +2,7 @@ package io.github.nickacpt.earstugger.utils.ears.alfalfa
 
 import com.unascribed.ears.api.Slice
 import com.unascribed.ears.api.features.AlfalfaData
+import com.unascribed.ears.common.util.BitInputStream
 import com.unascribed.ears.common.util.BitOutputStream
 import java.io.ByteArrayOutputStream
 
@@ -9,8 +10,15 @@ class ManagedAlfalfaData {
 
     private val dataMap = mutableMapOf<AlfalfaTypedKey<in Any>, Any>()
 
+    val data: Map<AlfalfaTypedKey<in Any>, Any>
+        get() = dataMap
+
+    fun <T : Any> contains(key: AlfalfaTypedKey<T>): Boolean {
+        return dataMap.containsKey(key as AlfalfaTypedKey<*>)
+    }
+
     @Suppress("USELESS_CAST", "UNCHECKED_CAST")
-    fun <T> get(key: AlfalfaTypedKey<T>): T? {
+    fun <T : Any> get(key: AlfalfaTypedKey<T>): T? {
         return dataMap[key as AlfalfaTypedKey<*>] as T?
     }
 
@@ -20,7 +28,7 @@ class ManagedAlfalfaData {
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun <T> remove(key: AlfalfaTypedKey<T>) {
+    fun <T : Any> remove(key: AlfalfaTypedKey<T>) {
         dataMap.remove(key as AlfalfaTypedKey<in Any>)
     }
 
@@ -38,5 +46,22 @@ class ManagedAlfalfaData {
         }
 
         return AlfalfaData(AlfalfaConstants.DATA_VERSION_1, finalMap)
+    }
+
+    companion object {
+        fun fromAlfalfaData(alfalfaData: AlfalfaData): ManagedAlfalfaData {
+            AlfalfaConstants.init()
+
+            val result = ManagedAlfalfaData()
+
+            for ((key, value) in alfalfaData.data) {
+                BitInputStream(value.toByteArray().inputStream()).use { bis ->
+                    @Suppress("UNCHECKED_CAST") val alfalfaKey = AlfalfaTypedKey.KEYS[key] as? AlfalfaTypedKey<in Any>
+                    alfalfaKey?.codec?.decode(bis)?.let { result.set(alfalfaKey, it) }
+                }
+            }
+
+            return result
+        }
     }
 }

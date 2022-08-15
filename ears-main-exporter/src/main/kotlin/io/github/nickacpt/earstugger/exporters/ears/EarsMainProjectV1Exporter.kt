@@ -9,14 +9,14 @@ import com.unascribed.ears.common.EarsCommon
 import com.unascribed.ears.common.EarsFeaturesWriterV1
 import io.github.nickacpt.earstugger.core.project.io.EarsTuggerProjectExporter
 import io.github.nickacpt.earstugger.core.project.model.EarsTuggerProjectModel
-import io.github.nickacpt.earstugger.utils.ears.EarsFeaturesUtils
+import io.github.nickacpt.earstugger.utils.ears.EarsFeaturesExporter
 import io.github.nickacpt.earstugger.utils.ears.GlowEarsImage
 import java.io.ByteArrayInputStream
 import java.nio.file.Files
 
 object EarsMainProjectV1Exporter : EarsTuggerProjectExporter {
     override fun export(project: EarsTuggerProjectModel) {
-        val earsFeatures = EarsFeaturesUtils.createEarsFeaturesFromProjectModel(project)
+        val earsFeatures = EarsFeaturesExporter.createEarsFeaturesFromProjectModel(project)
 
         project.inputs.forEach { input ->
             if (Files.exists(project.output) && Files.isSameFile(input, project.output)) {
