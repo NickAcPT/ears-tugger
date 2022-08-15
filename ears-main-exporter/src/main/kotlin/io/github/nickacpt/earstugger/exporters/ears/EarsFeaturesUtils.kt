@@ -1,43 +1,34 @@
 package io.github.nickacpt.earstugger.exporters.ears
 
-import com.unascribed.ears.api.Slice
+import com.playsawdust.chipper.glow.image.io.PNGImageLoader
 import com.unascribed.ears.api.features.AlfalfaData
 import com.unascribed.ears.api.features.EarsFeatures
-import com.unascribed.ears.common.util.BitOutputStream
 import io.github.nickacpt.earstugger.core.project.model.EarsTuggerProjectModel
-import io.github.nickacpt.earstugger.core.project.model.data.EraseRegionData
-import java.io.ByteArrayOutputStream
+import io.github.nickacpt.earstugger.exporters.ears.alfalfa.AlfalfaConstants
+import io.github.nickacpt.earstugger.exporters.ears.alfalfa.ManagedAlfalfaData
 import java.lang.Enum.*
+import kotlin.io.path.readBytes
 
 object EarsFeaturesUtils {
 
-    private fun EraseRegionData.writeToAlfalfa(output: BitOutputStream) {
-        output.write(6, x)
-        output.write(6, y)
-
-        output.write(5, width - 1)
-        output.write(5, height - 1)
-    }
-
     private fun createAlfalfaFromProjectModel(model: EarsTuggerProjectModel): AlfalfaData {
-        val alfalfaMap = mutableMapOf<String, Slice>()
+        val data = ManagedAlfalfaData()
 
-        if (model.eraseRegions.isNotEmpty()) {
-            val eraserBytes = ByteArrayOutputStream()
-            BitOutputStream(eraserBytes).use { bos ->
-                model.eraseRegions.forEach {
-                    it.writeToAlfalfa(bos)
-                }
-                bos.flush()
-            }
-            alfalfaMap["erase"] = Slice(eraserBytes.toByteArray())
+        val cape = model.cape
+        if (cape != null) {
+            data.set(AlfalfaConstants.CAPE_KEY, PNGImageLoader.load(cape.readBytes().inputStream()))
         }
 
-        return AlfalfaData(1, alfalfaMap)
+        if (model.eraseRegions.isNotEmpty()) {
+            data.set(AlfalfaConstants.ERASE_REGIONS_LIST_KEY, model.eraseRegions)
+        }
+
+        return data.toAlfalfaData()
     }
 
     fun createEarsFeaturesFromProjectModel(model: EarsTuggerProjectModel): EarsFeatures {
         return if (model.ears.enabled) {
+            @Suppress("DEPRECATION") // Internal but we take proper care of it
             EarsFeatures.builder()
                 .earMode(model.ears.earMode.convert())
                 .earAnchor(model.ears.earAnchor.convert())
@@ -46,6 +37,7 @@ object EarsFeaturesUtils {
                 .tailMode(model.tail.tailMode.convert())
                 .tailSegments(model.tail.tailSegments)
                 .wingMode(model.wings.wingMode.convert())
+                .capeEnabled(model.cape != null)
                 .alfalfa(createAlfalfaFromProjectModel(model))
                 .also {
                     val tailBends = model.tail.tailBends ?: return@also

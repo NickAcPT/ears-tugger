@@ -21,7 +21,7 @@ subprojects {
     }
 
     this.dependencies {
-        "implementation"(kotlin("stdlib"))
+        "implementation"(kotlin("stdlib-jdk8"))
         if (this@subprojects.name != "core") {
             "implementation"(project(":core"))
         }

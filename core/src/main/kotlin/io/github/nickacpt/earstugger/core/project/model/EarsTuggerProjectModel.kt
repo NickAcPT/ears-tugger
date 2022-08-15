@@ -12,6 +12,8 @@ data class EarsTuggerProjectModel(
     val inputs: List<Path>,
     val output: Path,
 
+    var cape: Path? = null,
+
     val ears: EarsCustomizationModel = EarsCustomizationModel(),
     var wings: WingsCustomizationModel = WingsCustomizationModel(),
     var tail: TailCustomizationModel = TailCustomizationModel(),
