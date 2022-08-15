@@ -3,7 +3,7 @@ package io.github.nickacpt.earstugger.exporters.ears.versions
 import com.playsawdust.chipper.glow.image.ImageData
 import com.unascribed.ears.common.WritableEarsImage
 
-class GlowImageEarsImage(internal val imageData: ImageData) : WritableEarsImage {
+class GlowEarsImage(private val imageData: ImageData) : WritableEarsImage {
     override fun getWidth(): Int = imageData.width
 
     override fun getHeight(): Int  = imageData.height
@@ -14,7 +14,7 @@ class GlowImageEarsImage(internal val imageData: ImageData) : WritableEarsImage 
         imageData.setPixel(x, y, argb)
     }
 
-    override fun copy(): GlowImageEarsImage {
-        return GlowImageEarsImage(ImageData(imageData.width, imageData.height, imageData.data.clone()))
+    override fun copy(): GlowEarsImage {
+        return GlowEarsImage(ImageData(imageData.width, imageData.height, imageData.data.clone()))
     }
 }

@@ -24,7 +24,7 @@ object EarsMainProjectV1Exporter : EarsTuggerProjectExporter {
         }
 
         val output = ImageData(64, 64)
-        val earsOutput = GlowImageEarsImage(output)
+        val earsOutput = GlowEarsImage(output)
         val outputEditor = ImageEditor.edit(output)
 
         for (input in project.inputs) {

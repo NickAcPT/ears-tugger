@@ -28,43 +28,49 @@ object EarsFeaturesUtils {
 
     fun createEarsFeaturesFromProjectModel(model: EarsTuggerProjectModel): EarsFeatures {
         return if (model.ears.enabled) {
-            @Suppress("DEPRECATION") // Internal but we take proper care of it
-            EarsFeatures.builder()
-                .earMode(model.ears.earMode.convert())
-                .earAnchor(model.ears.earAnchor.convert())
-                .claws(model.protrusions.claws)
-                .horn(model.protrusions.horn)
-                .tailMode(model.tail.tailMode.convert())
-                .tailSegments(model.tail.tailSegments)
-                .wingMode(model.wings.wingMode.convert())
-                .capeEnabled(model.cape != null)
-                .alfalfa(createAlfalfaFromProjectModel(model))
-                .also {
-                    val tailBends = model.tail.tailBends ?: return@also
+            // Internal but we take proper care of it
+            @Suppress("DEPRECATION")
+            EarsFeatures.builder().apply {
+                // First, the ears
+                earMode(model.ears.earMode.convert())
+                earAnchor(model.ears.earAnchor.convert())
+
+                // Then, the protrusions
+                claws(model.protrusions.claws)
+                horn(model.protrusions.horn)
+
+                // Then, the tails
+                tailMode(model.tail.tailMode.convert())
+                tailSegments(model.tail.tailSegments)
+
+                // Capes and Wings
+                capeEnabled(model.cape != null)
+                wingMode(model.wings.wingMode.convert())
+
+                // TODO: chest
+
+                // Finally, the alfalfa
+                alfalfa(createAlfalfaFromProjectModel(model))
+
+
+                val tailBends = model.tail.tailBends
+                if (tailBends != null) {
                     val (firstBend, secondBend, thirdBend, fourthBend) = tailBends
-                    it.tailBends(firstBend, secondBend, thirdBend, fourthBend)
+                    tailBends(firstBend, secondBend, thirdBend, fourthBend)
                 }
-                .also {
-                    val snout = model.snout ?: return@also
-                    it.snoutWidth(snout.width)
-                    it.snoutHeight(snout.height)
-                    it.snoutDepth(snout.length)
-                    it.snoutOffset(snout.offset)
+
+
+                val snout = model.snout
+                if (snout != null) {
+                    snoutWidth(snout.width)
+                    snoutHeight(snout.height)
+                    snoutDepth(snout.length)
+                    snoutOffset(snout.offset)
                 }
-                .build()
+
+            }.build()
         } else {
             EarsFeatures.DISABLED
         }
     }
-
-    private inline fun <reified I : Enum<I>, reified O : Enum<O>> I.convert(): O {
-        val outConsts = O::class.java.enumConstants.map { it.name }
-        val inConsts = I::class.java.enumConstants.map { it.name }
-        if (outConsts.any { !inConsts.contains(it) }) {
-            throw IllegalArgumentException("Invalid conversion from ${I::class.java.name} to ${O::class.java.name}")
-        }
-
-        return valueOf(O::class.java, this.name)
-    }
-
 }
