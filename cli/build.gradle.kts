@@ -1,4 +1,5 @@
 plugins {
+    id ("com.github.johnrengelman.shadow") version "7.1.2"
     application
 }
 
@@ -15,4 +16,12 @@ dependencies {
 
 application {
     mainClass.set("io.github.nickacpt.earstugger.cli.EntrypointKt")
+}
+
+tasks {
+    shadowJar {
+        manifest {
+            attributes(mapOf("Main-Class" to application.mainClassName))
+        }
+    }
 }
