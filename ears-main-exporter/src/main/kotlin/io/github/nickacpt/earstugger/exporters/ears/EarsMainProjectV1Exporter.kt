@@ -36,8 +36,12 @@ object EarsMainProjectV1Exporter : EarsTuggerProjectExporter {
 
         EarsCommon.preprocessSkin(earsOutput)
 
-        EarsFeaturesWriterV1.write(earsFeatures, earsOutput)
-        Alfalfa.write(earsFeatures.alfalfa, earsOutput)
+        if (project.ears.enabled) {
+            EarsFeaturesWriterV1.write(earsFeatures, earsOutput)
+            Alfalfa.write(earsFeatures.alfalfa, earsOutput)
+        } else {
+            Alfalfa.write(EarsFeaturesExporter.createAlfalfaFromProjectModel(project), earsOutput)
+        }
 
         val outputStream = project.output.toFile().outputStream()
         PNGImageWriter.write(output, outputStream)

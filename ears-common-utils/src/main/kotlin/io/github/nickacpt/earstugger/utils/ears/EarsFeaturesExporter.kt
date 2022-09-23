@@ -18,7 +18,7 @@ import kotlin.io.path.readBytes
 
 object EarsFeaturesExporter {
 
-    private fun createAlfalfaFromProjectModel(model: EarsTuggerProjectModel): AlfalfaData {
+    fun createAlfalfaFromProjectModel(model: EarsTuggerProjectModel): AlfalfaData {
         val data = ManagedAlfalfaData()
 
         val cape = model.cape
