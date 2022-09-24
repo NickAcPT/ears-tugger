@@ -10,7 +10,6 @@ subprojects {
     this.group = "io.github.nickacpt.earstugger"
     this.version = "1.0-SNAPSHOT"
 
-    this.
     repositories {
         mavenCentral()
         maven("https://repo.unascribed.com")
@@ -22,7 +21,7 @@ subprojects {
 
     this.dependencies {
         "implementation"(kotlin("stdlib-jdk8"))
-        if (this@subprojects.name != "core") {
+        if (this@subprojects.name !in arrayOf("core", "cli-utils", "ears-utils-eraser")) {
             "implementation"(project(":core"))
         }
     }
