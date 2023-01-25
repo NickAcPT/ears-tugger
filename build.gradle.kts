@@ -8,7 +8,7 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
     this.group = "io.github.nickacpt.earstugger"
-    this.version = "1.0-SNAPSHOT"
+    this.version = "1.0.1-SNAPSHOT"
 
     repositories {
         mavenCentral()
