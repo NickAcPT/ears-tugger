@@ -31,7 +31,10 @@ object EarsMainProjectV1Exporter : EarsTuggerProjectExporter {
         for (input in project.inputs) {
             val inputStream = ByteArrayInputStream(input.toFile().readBytes())
             val image = PNGImageLoader.load(inputStream)
-            outputEditor.drawImage(image, 0, 0)
+            outputEditor.drawImage(image, 0, 0) { src, dst, alpha ->
+                val dstAlpha = dst.and(0xFF000000.toInt()).ushr(24)
+                if (dstAlpha == 0) src else dst
+            }
         }
 
         EarsCommon.preprocessSkin(earsOutput)
