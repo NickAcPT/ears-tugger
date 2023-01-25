@@ -38,7 +38,7 @@ object EarsMainProjectImporter {
         val managedAlfalfa = ManagedAlfalfaData.fromAlfalfaData(features.alfalfa)
 
         val ears =
-            EarsCustomizationModel(features.enabled, features.earMode.convert(), features.earAnchor.convert())
+            EarsCustomizationModel(features.enabled, features.earMode.convert(), features.earAnchor.convert(), features.emissive)
         val protrusions = ProtrusionsCustomizationModel(features.claws, features.horn)
 
         val tail = TailCustomizationModel(

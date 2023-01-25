@@ -54,6 +54,8 @@ object EarsFeaturesExporter {
                 capeEnabled(model.cape != null)
                 wingMode(model.wings.wingMode.convert())
 
+                emissive(model.ears.emissive)
+
                 // TODO: chest
 
                 // Finally, the alfalfa

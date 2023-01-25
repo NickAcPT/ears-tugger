@@ -8,5 +8,7 @@ data class EarsCustomizationModel(
 
     var earMode: EarMode = EarMode.NONE,
     var earAnchor: EarAnchor = EarAnchor.FRONT,
+
+    var emissive: Boolean = false,
 )
 
