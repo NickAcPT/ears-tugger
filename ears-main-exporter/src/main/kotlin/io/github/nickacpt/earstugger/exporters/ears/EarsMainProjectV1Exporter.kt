@@ -32,8 +32,8 @@ object EarsMainProjectV1Exporter : EarsTuggerProjectExporter {
             val inputStream = ByteArrayInputStream(input.toFile().readBytes())
             val image = PNGImageLoader.load(inputStream)
             outputEditor.drawImage(image, 0, 0) { src, dst, alpha ->
-                val dstAlpha = dst.and(0xFF000000.toInt()).ushr(24)
-                if (dstAlpha == 0) src else dst
+                val srcAlpha = src.and(0xFF000000.toInt()).ushr(24)
+                if (srcAlpha == 0) dst else src
             }
         }
 
